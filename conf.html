@@ -38,7 +38,7 @@
   </style>
 </head>
 <body>
-  <h1>محاسبه قیمت کانفیگ WireGuard اشتراکی</h1>
+  <h1>محاسبه قیمت کانفیگ WireGuard اشتراکی راسان دیزاین</h1>
   <div class="card">
     <label>حجم کل ترافیک (گیگ):</label><br />
     <input type="number" id="traffic" placeholder="مثلاً 1468" /><br />
@@ -61,11 +61,10 @@
       }
 
       const months = days / 30;
-      const basePricePerGBPerMonth = 3; // 3 تومان برای هر گیگ در هر ماه
+      const basePricePerGBPerMonth = 20; // 3 تومان برای هر گیگ در هر ماه
 
       let totalPrice = traffic * basePricePerGBPerMonth * months;
 
-      if (totalPrice < 50000) totalPrice = 50000; // سقف قیمت
 
       const formatted = totalPrice.toLocaleString("fa-IR") + " تومان";
       document.getElementById("result").innerText = `قیمت پیشنهادی: ${formatted}`;
