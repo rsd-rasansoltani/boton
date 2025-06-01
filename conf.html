@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>محاسبه قیمت کانفیگ WireGuard اشتراکی</title>
+  <style>
+    body {
+      font-family: Vazirmatn, sans-serif;
+      background-color: #111;
+      color: #eee;
+      text-align: center;
+      padding: 30px;
+      direction: rtl;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      width: 90%;
+      max-width: 300px;
+    }
+    .card {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 16px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px #333;
+    }
+    .price {
+      font-size: 24px;
+      margin-top: 20px;
+      color: #00ff88;
+    }
+  </style>
+</head>
+<body>
+  <h1>محاسبه قیمت کانفیگ WireGuard اشتراکی</h1>
+  <div class="card">
+    <label>حجم کل ترافیک (گیگ):</label><br />
+    <input type="number" id="traffic" placeholder="مثلاً 1468" /><br />
+
+    <label>مدت زمان (روز):</label><br />
+    <input type="number" id="days" placeholder="مثلاً 732" /><br />
+
+    <button onclick="calculatePrice()">محاسبه قیمت</button>
+    <div class="price" id="result"></div>
+  </div>
+
+  <script>
+    function calculatePrice() {
+      const traffic = parseFloat(document.getElementById("traffic").value);
+      const days = parseInt(document.getElementById("days").value);
+
+      if (!traffic || !days || traffic <= 0 || days <= 0) {
+        document.getElementById("result").innerText = "لطفاً مقادیر معتبر وارد کنید";
+        return;
+      }
+
+      const months = days / 30;
+      const basePricePerGBPerMonth = 3; // 3 تومان برای هر گیگ در هر ماه
+
+      let totalPrice = traffic * basePricePerGBPerMonth * months;
+
+      if (totalPrice < 50000) totalPrice = 50000; // سقف قیمت
+
+      const formatted = totalPrice.toLocaleString("fa-IR") + " تومان";
+      document.getElementById("result").innerText = `قیمت پیشنهادی: ${formatted}`;
+    }
+  </script>
+</body>
+</html>
